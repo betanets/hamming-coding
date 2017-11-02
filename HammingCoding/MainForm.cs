@@ -1,32 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HammingCoding
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        private HammingCode coder = new HammingCode();
+        public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Code coder = new Code();
-            string codeString = this.textBox1.Text;
-
-            var code = Helpers.prettyStringToBoolArray(codeString);
-            var encoded = coder.Encode(code);
-
-            this.textBox1.Text = Helpers.boolArrayToPrettyString(encoded);
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,7 +42,7 @@ namespace HammingCoding
                             }
                             sr.Close();
                         }
-                        textBox1.Text = sb.ToString();
+                        richTextBox_data.Text = sb.ToString();
                     }
                 }
                 catch (Exception ex)
@@ -70,17 +54,12 @@ namespace HammingCoding
 
         private void построитьКодToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Code coder = new Code();
-            String asciiCode = coder.ConstructCodeFromText(textBox1.Text);
-            textBox1.Text = asciiCode;
-            //var code = Helpers.prettyStringToBoolArray(codeString);
+            richTextBox_data.Text = coder.EncodeFromText(richTextBox_data.Text);
         }
 
         private void декодироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Code coder = new Code();
-            String asciiCode = coder.DecodeFromText(textBox1.Text);
-            textBox1.Text = asciiCode;
+            richTextBox_data.Text = coder.DecodeFromText(richTextBox_data.Text);
         }
     }
 }
