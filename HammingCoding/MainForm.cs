@@ -43,6 +43,7 @@ namespace HammingCoding
                             sr.Close();
                         }
                         richTextBox_data.Text = sb.ToString();
+                        operationStatusLabel.Text = "Файл открыт: " + openFileDialog.FileName;
                     }
                 }
                 catch (Exception ex)
@@ -55,11 +56,13 @@ namespace HammingCoding
         private void построитьКодToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox_data.Text = coder.EncodeFromText(richTextBox_data.Text);
+            operationStatusLabel.Text = "Код построен";
         }
 
         private void декодироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox_data.Text = coder.DecodeFromText(richTextBox_data.Text);
+            operationStatusLabel.Text = "Декодирование выполнено";
         }
     }
 }
