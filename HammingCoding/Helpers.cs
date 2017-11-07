@@ -44,7 +44,16 @@ namespace HammingCoding
                 if (binary.Length - i < 8) break;
 
                 String t = binary.Substring(i, 8);
-                list.Add(Convert.ToByte(t, 2));
+                byte oneByte = Convert.ToByte(t, 2);
+                //Первые 8 символов в любом случае заменяем на звёздочки - они непечатаемые и могут повлять на результат
+                if (oneByte > 8)
+                {
+                    list.Add(Convert.ToByte(t, 2));
+                }
+                else
+                {
+                    list.Add((byte)42); //Символ '*'
+                }
             }
 
             return list.ToArray();
