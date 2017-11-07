@@ -64,5 +64,11 @@ namespace HammingCoding
             richTextBox_data.Text = coder.DecodeFromText(richTextBox_data.Text);
             operationStatusLabel.Text = "Декодирование выполнено";
         }
+
+        private void внестиОшибкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox_data.Text = Helpers.makeErrors(richTextBox_data.Text, Convert.ToDouble(numericUpDown_error.Value));
+            operationStatusLabel.Text = "Внесены ошибки";
+        }
     }
 }

@@ -65,6 +65,9 @@ namespace HammingCoding
 
         public String DecodeFromText(String text)
         {
+            //Счётчик числа ошибок в коде
+            int errorsCount = 0;
+
             //Получение массива битов закодированного текста и вычисление его размера
             bool[] bits = text.Select(chr => chr == '1').ToArray();
             int bitsSize = bits.Length;
@@ -85,7 +88,7 @@ namespace HammingCoding
                     int errorIndex = ErrorSyndrome(infoPortion);
                     if (errorIndex != 0)
                     {
-                        MessageBox.Show("Обнаружена ошибка в коде\nНомер символа: " + (15 * multiplier + errorIndex) + ". Блок " + (multiplier+1) + ", символ " + errorIndex, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        errorsCount++;
                         infoPortion[errorIndex - 1] = !infoPortion[errorIndex - 1];
                     }
                     //Получение декодированных битов, построение результирующей бинарной строки
@@ -111,6 +114,8 @@ namespace HammingCoding
                     j++;
                 }
             }
+
+            MessageBox.Show("Обнаружено ошибок: " + errorsCount, "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             //Получение байтов из результирующей бинарной строки
             var data = Helpers.GetBytesFromBinaryString(decodedString);

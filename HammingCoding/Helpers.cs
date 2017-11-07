@@ -6,6 +6,8 @@ namespace HammingCoding
 {
     public static class Helpers
     {
+        static Random random = new Random();
+
         //Метод проверки индекса элемента на степень двойки
         public static bool notPowerOf2(int x)
         {
@@ -54,6 +56,29 @@ namespace HammingCoding
             bool[] array = new bool[length];
             for (int i = 0; i < length; i++) array[i] = false;
             return array;
+        }
+
+        public static string makeErrors(string text, double errorChance)
+        {
+            string result = "";
+            foreach(var sym in text)
+            {
+                if (random.NextDouble() > (1 - errorChance))
+                {
+                    if (sym == '1')
+                    {
+                       result += '0';
+                    }
+                    else
+                    {
+                        result += '1';
+                    }
+                } else
+                {
+                    result += sym;
+                }
+            }
+            return result;
         }
     }
 }
